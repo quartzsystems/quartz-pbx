@@ -1,0 +1,91 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Extension {
+  id        String   @id @default(cuid())
+  extension String   @unique
+  name      String
+  password  String
+  email     String?
+  callerId  String?
+  voicemail Boolean  @default(false)
+  context   String   @default("from-internal")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("extensions")
+}
+
+// type: SIP | PJSIP | IAX2
+model Trunk {
+  id                  String               @id @default(cuid())
+  type                String               @default("PJSIP")
+  name                String               @unique
+  host                String
+  username            String
+  password            String
+  context             String               @default("from-trunk")
+  codecs              String               @default("ulaw,alaw,g722")
+  register            Boolean              @default(true)
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
+  outboundRouteTrunks OutboundRouteTrunk[]
+
+  @@map("trunks")
+}
+
+model InboundRoute {
+  id              String   @id @default(cuid())
+  name            String
+  did             String?
+  cidNumber       String?
+  destination     String
+  destinationType String   @default("extension")
+  priority        Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@map("inbound_routes")
+}
+
+model OutboundRoute {
+  id          String                 @id @default(cuid())
+  name        String
+  callerId    String?
+  prepend     String                 @default("")
+  stripDigits Int                    @default(0)
+  priority    Int                    @default(0)
+  createdAt   DateTime               @default(now())
+  updatedAt   DateTime               @updatedAt
+  patterns    OutboundRoutePattern[]
+  trunks      OutboundRouteTrunk[]
+
+  @@map("outbound_routes")
+}
+
+model OutboundRoutePattern {
+  id              String        @id @default(cuid())
+  pattern         String
+  outboundRouteId String
+  outboundRoute   OutboundRoute @relation(fields: [outboundRouteId], references: [id], onDelete: Cascade)
+
+  @@map("outbound_route_patterns")
+}
+
+model OutboundRouteTrunk {
+  id              String        @id @default(cuid())
+  order           Int           @default(0)
+  outboundRouteId String
+  trunkId         String
+  outboundRoute   OutboundRoute @relation(fields: [outboundRouteId], references: [id], onDelete: Cascade)
+  trunk           Trunk         @relation(fields: [trunkId], references: [id], onDelete: Cascade)
+
+  @@unique([outboundRouteId, trunkId])
+  @@map("outbound_route_trunks")
+}
