@@ -19,20 +19,20 @@ interface StatCardProps {
 
 function StatCard({ label, value, icon: Icon, accent }: StatCardProps) {
   return (
-    <div className="rounded-xl border border-surface-border bg-surface-card p-6">
+    <div className="rounded-lg border border-surface-border bg-surface-card p-[18px] shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-xs font-medium uppercase tracking-wide text-zinc-500">{label}</p>
-          <p className="mt-2 text-3xl font-bold text-zinc-50">{value}</p>
+          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-zinc-600">{label}</p>
+          <p className="mt-1.5 font-mono text-[32px] font-semibold leading-none text-zinc-50">{value}</p>
         </div>
         <div
           className={
             accent
-              ? 'rounded-lg bg-accent-500/10 p-3'
-              : 'rounded-lg bg-surface-elevated p-3'
+              ? 'rounded-md bg-accent-500/10 p-2.5'
+              : 'rounded-md bg-surface-elevated p-2.5'
           }
         >
-          <Icon className={`h-5 w-5 ${accent ? 'text-accent-500' : 'text-zinc-400'}`} />
+          <Icon className={`h-5 w-5 ${accent ? 'text-accent-500' : 'text-zinc-500'}`} strokeWidth={1.5} />
         </div>
       </div>
     </div>
@@ -65,16 +65,16 @@ export default function DashboardPage() {
 
       {calls.length > 0 && (
         <section>
-          <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-zinc-500">
+          <h2 className="mb-4 font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-zinc-600">
             Active Calls
           </h2>
           <div className="overflow-hidden rounded-xl border border-surface-border bg-surface-card">
             <table className="min-w-full divide-y divide-surface-border text-sm">
               <thead>
                 <tr className="bg-surface-elevated">
-                  <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wide text-zinc-500">Channel</th>
-                  <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wide text-zinc-500">Caller</th>
-                  <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wide text-zinc-500">State</th>
+                  <th className="px-4 py-3 text-left font-mono text-[10.5px] font-semibold uppercase tracking-[0.08em] text-zinc-600">Channel</th>
+                  <th className="px-4 py-3 text-left font-mono text-[10.5px] font-semibold uppercase tracking-[0.08em] text-zinc-600">Caller</th>
+                  <th className="px-4 py-3 text-left font-mono text-[10.5px] font-semibold uppercase tracking-[0.08em] text-zinc-600">State</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-surface-border">

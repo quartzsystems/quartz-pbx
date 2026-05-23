@@ -5,12 +5,13 @@
 @layer base {
   html {
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
     color-scheme: dark;
   }
 
   body {
     background-color: #0f1117;
-    color: #e8eaf0;
+    color: #d7d9de;
   }
 
   ::-webkit-scrollbar {
@@ -18,13 +19,13 @@
     height: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: #0f1117;
+    background: transparent;
   }
   ::-webkit-scrollbar-thumb {
     background: #252830;
-    border-radius: 3px;
+    border-radius: 999px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #363a45;
+    background: #2f323c;
   }
 }

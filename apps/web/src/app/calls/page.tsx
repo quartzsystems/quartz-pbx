@@ -33,60 +33,58 @@ export default function CallsPage() {
         description="Active channels — auto-refreshes every 3 seconds"
       />
 
-      <div className="rounded-xl border border-surface-border bg-surface-card p-6">
-        {isLoading ? (
-          <p className="py-16 text-center text-sm text-zinc-600">Loading…</p>
-        ) : calls.length === 0 ? (
-          <div className="py-16 text-center">
-            <p className="text-sm text-zinc-600">No active calls</p>
-          </div>
-        ) : (
-          <div className="overflow-hidden rounded-xl border border-surface-border">
-            <table className="min-w-full divide-y divide-surface-border text-sm">
-              <thead className="bg-surface-elevated">
-                <tr>
-                  <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wide text-zinc-500">Channel</th>
-                  <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wide text-zinc-500">Caller</th>
-                  <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wide text-zinc-500">Connected</th>
-                  <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wide text-zinc-500">State</th>
-                  <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wide text-zinc-500">Duration</th>
-                  <th className="px-4 py-3" />
+      {isLoading ? (
+        <p className="py-16 text-center text-sm text-zinc-600">Loading…</p>
+      ) : calls.length === 0 ? (
+        <div className="rounded-xl border border-dashed border-surface-border py-16 text-center">
+          <p className="text-sm text-zinc-600">No active calls</p>
+        </div>
+      ) : (
+        <div className="overflow-hidden rounded-xl border border-surface-border">
+          <table className="min-w-full divide-y divide-surface-border text-sm">
+            <thead className="bg-surface-elevated">
+              <tr>
+                <th className="px-4 py-3 text-left font-mono text-[10.5px] font-semibold uppercase tracking-[0.08em] text-zinc-600">Channel</th>
+                <th className="px-4 py-3 text-left font-mono text-[10.5px] font-semibold uppercase tracking-[0.08em] text-zinc-600">Caller</th>
+                <th className="px-4 py-3 text-left font-mono text-[10.5px] font-semibold uppercase tracking-[0.08em] text-zinc-600">Connected</th>
+                <th className="px-4 py-3 text-left font-mono text-[10.5px] font-semibold uppercase tracking-[0.08em] text-zinc-600">State</th>
+                <th className="px-4 py-3 text-left font-mono text-[10.5px] font-semibold uppercase tracking-[0.08em] text-zinc-600">Duration</th>
+                <th className="px-4 py-3" />
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-surface-border bg-surface-card">
+              {calls.map((call) => (
+                <tr key={call.id} className="hover:bg-surface-elevated/50">
+                  <td className="px-4 py-3 font-mono text-xs text-zinc-400">{call.name}</td>
+                  <td className="px-4 py-3 text-zinc-300">
+                    {call.caller.name} &lt;{call.caller.number}&gt;
+                  </td>
+                  <td className="px-4 py-3 text-zinc-300">
+                    {call.connected.name} &lt;{call.connected.number}&gt;
+                  </td>
+                  <td className="px-4 py-3">
+                    <Badge variant="accent" dot>{call.state}</Badge>
+                  </td>
+                  <td className="px-4 py-3 font-mono text-zinc-500">
+                    {formatDuration(call.creationtime)}
+                  </td>
+                  <td className="px-4 py-3 text-right">
+                    <Button
+                      size="sm"
+                      variant="danger"
+                      loading={hangupMutation.isPending && hangupMutation.variables === call.id}
+                      onClick={() => hangupMutation.mutate(call.id)}
+                    >
+                      <PhoneOff className="h-3.5 w-3.5" />
+                      Hangup
+                    </Button>
+                  </td>
                 </tr>
-              </thead>
-              <tbody className="divide-y divide-surface-border bg-surface-card">
-                {calls.map((call) => (
-                  <tr key={call.id} className="hover:bg-surface-elevated/50">
-                    <td className="px-4 py-3 font-mono text-xs text-zinc-400">{call.name}</td>
-                    <td className="px-4 py-3 text-zinc-300">
-                      {call.caller.name} &lt;{call.caller.number}&gt;
-                    </td>
-                    <td className="px-4 py-3 text-zinc-300">
-                      {call.connected.name} &lt;{call.connected.number}&gt;
-                    </td>
-                    <td className="px-4 py-3">
-                      <Badge variant="accent">{call.state}</Badge>
-                    </td>
-                    <td className="px-4 py-3 font-mono text-zinc-500">
-                      {formatDuration(call.creationtime)}
-                    </td>
-                    <td className="px-4 py-3 text-right">
-                      <Button
-                        size="sm"
-                        variant="danger"
-                        loading={hangupMutation.isPending && hangupMutation.variables === call.id}
-                        onClick={() => hangupMutation.mutate(call.id)}
-                      >
-                        <PhoneOff className="h-3.5 w-3.5" />
-                        Hangup
-                      </Button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </div>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 }

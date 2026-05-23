@@ -3,12 +3,13 @@
 // root directory of this project.
 
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Manrope, JetBrains_Mono } from 'next/font/google';
 import { Providers } from '@/components/providers';
 import { Sidebar } from '@/components/layout/sidebar';
 import './globals.css';
 
-const inter = Inter({ subsets: ['latin'] });
+const manrope = Manrope({ subsets: ['latin'], variable: '--font-sans' });
+const jetbrainsMono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-mono' });
 
 export const metadata: Metadata = {
   title: 'Quartz PBX',
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="dark">
-      <body className={`${inter.className} bg-surface-bg text-zinc-100`}>
+      <body className={`${manrope.variable} ${jetbrainsMono.variable} font-sans bg-surface-bg text-zinc-100`}>
         <Providers>
           <div className="flex h-screen overflow-hidden">
             <Sidebar />

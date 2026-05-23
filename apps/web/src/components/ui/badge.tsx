@@ -4,31 +4,45 @@
 
 import { cn } from '@/lib/utils';
 
-type BadgeVariant = 'success' | 'warning' | 'error' | 'neutral' | 'accent';
+type BadgeVariant = 'success' | 'warning' | 'error' | 'info' | 'neutral' | 'accent';
 
 interface BadgeProps {
   variant?: BadgeVariant;
+  dot?: boolean;
   children: React.ReactNode;
   className?: string;
 }
 
 const variantClasses: Record<BadgeVariant, string> = {
-  accent:  'bg-accent-500/10 text-accent-400 ring-accent-500/20',
-  success: 'bg-emerald-500/10 text-emerald-400 ring-emerald-500/20',
-  warning: 'bg-yellow-500/10 text-yellow-400 ring-yellow-500/20',
-  error:   'bg-red-500/10 text-red-400 ring-red-500/20',
-  neutral: 'bg-zinc-700/50 text-zinc-400 ring-zinc-600/20',
+  accent:  'bg-accent-500/14 border-accent-500/38 text-accent-400',
+  success: 'bg-accent-500/14 border-accent-500/38 text-accent-500',
+  warning: 'bg-status-warn/14 border-status-warn/38 text-status-warn',
+  error:   'bg-status-danger/14 border-status-danger/38 text-status-danger',
+  info:    'bg-status-info/14 border-status-info/38 text-status-info',
+  neutral: 'bg-surface-input border-surface-border text-zinc-400',
 };
 
-export function Badge({ variant = 'neutral', children, className }: BadgeProps) {
+const dotColors: Record<BadgeVariant, string> = {
+  accent:  'bg-accent-500',
+  success: 'bg-accent-500',
+  warning: 'bg-status-warn',
+  error:   'bg-status-danger',
+  info:    'bg-status-info',
+  neutral: 'bg-zinc-600',
+};
+
+export function Badge({ variant = 'neutral', dot, children, className }: BadgeProps) {
   return (
     <span
       className={cn(
-        'inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ring-1 ring-inset',
+        'inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 font-mono text-[10.5px] font-semibold tracking-[0.06em]',
         variantClasses[variant],
         className,
       )}
     >
+      {dot && (
+        <span className={cn('h-1.5 w-1.5 shrink-0 rounded-full', dotColors[variant])} />
+      )}
       {children}
     </span>
   );
