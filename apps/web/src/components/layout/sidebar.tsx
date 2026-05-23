@@ -101,8 +101,9 @@ function SubSection({
 export function Sidebar() {
   return (
     <aside className="flex h-screen w-60 flex-col border-r border-surface-border bg-surface-sunken">
-      <div className="flex h-14 items-center border-b border-surface-border px-4">
-        <span className="text-base font-bold tracking-tight text-accent-500">Quartz PBX</span>
+      <div className="border-b border-surface-border px-4 py-3">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/logo.svg" alt="Quartz PBX" className="block w-full h-auto" />
       </div>
 
       <nav className="flex-1 overflow-y-auto px-2 py-2 space-y-0.5">

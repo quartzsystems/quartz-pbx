@@ -1,0 +1,12 @@
+<svg width="100%" viewBox="183 58 318 128" role="img" xmlns="http://www.w3.org/2000/svg">
+  <title>Quartz PBX logo</title>
+  <desc>Quartz PBX logo with tighter wordmark spacing</desc>
+
+  <text x="193" y="108" fill="#faf9f5" style="font-family:'Anthropic Sans',sans-serif;font-size:52px;font-weight:500">Quartz</text>
+  <text x="386" y="108" fill="#00d992" style="font-family:'Anthropic Sans',sans-serif;font-size:52px;font-weight:500">PBX</text>
+
+  <path d="M 190,130 C 208,114 226,146 244,130 C 262,114 280,146 298,130 C 316,114 334,146 352,130 C 370,114 388,146 406,130 C 424,114 442,146 460,130 C 472,120 480,130 490,130" fill="none" stroke="#00d992" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M 190,140 C 208,124 226,156 244,140 C 262,124 280,156 298,140 C 316,124 334,156 352,140 C 370,124 388,156 406,140 C 424,124 442,156 460,140 C 472,130 480,140 490,140" fill="none" stroke="#00d992" stroke-width="1" stroke-linecap="round" opacity="0.25"/>
+
+  <text x="340" y="176" text-anchor="middle" style="fill:#c2c0b6;font-family:'Anthropic Sans',sans-serif;font-size:13px;font-weight:400">PRIVATE BRANCH EXCHANGE</text>
+</svg>

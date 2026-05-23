@@ -1,4 +1,6 @@
-# Quartz PBX
+<p align="center">
+  <img src="apps/web/public/logo.svg" alt="Quartz PBX" width="480" />
+</p>
 
 An open-source Asterisk management panel built with Node.js and Next.js. Configure extensions, trunks, and call routing through a clean web UI — no config file editing required.
 
